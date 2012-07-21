@@ -9,8 +9,16 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-import dj_database_url
-DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'mentalnote',                      # Or path to database file if using sqlite3.
+        'USER': 'mentalnote',                      # Not used with sqlite3.
+        'PASSWORD': 'toself',                      # Not used with sqlite3.
+        'HOST': '',                                # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                                # Set to empty string for default. Not used with sqlite3.
+    }
+}
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -145,3 +153,22 @@ LOGGING = {
         },
     }
 }
+import os, sys, urlparse
+urlparse.uses_netloc.append('postgres')
+urlparse.uses_netloc.append('mysql')
+try:
+    if os.environ.has_key('DATABASE_URL'):
+        url = urlparse.urlparse(os.environ['DATABASE_URL'])
+        DATABASES['default'] = {
+            'NAME':     url.path[1:],
+            'USER':     url.username,
+            'PASSWORD': url.password,
+            'HOST':     url.hostname,
+            'PORT':     url.port,
+        }
+        if url.scheme == 'postgres':
+            DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
+        if url.scheme == 'mysql':
+            DATABASES['default']['ENGINE'] = 'django.db.backends.mysql'
+except:
+    print "Unexpected error:", sys.exc_info()
