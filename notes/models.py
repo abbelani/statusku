@@ -11,8 +11,8 @@ class Note(models.Model):
    # slug = models.SlugField()
     body = models.TextField()
 
-    def __unicode__(self):
-        return self.title
+    #def __unicode__(self):
+       # return self.title
 
     def save(self, *args, **kwargs):
         return super(Note, self).save(*args, **kwargs)

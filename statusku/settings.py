@@ -63,7 +63,7 @@ STATIC_ROOT = ''
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/static/'
+STATIC_URL = "/assets/"
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -106,9 +106,11 @@ ROOT_URLCONF = 'statusku.urls'
 WSGI_APPLICATION = 'statusku.wsgi.application'
 
 TEMPLATE_DIRS = (
+    
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+    # Don't forget to use absolute paths, not relative paths
+    "./templates/"
 )
 
 INSTALLED_APPS = (
@@ -124,7 +126,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'tastypie',
-    'mynotes',
+    'notes',
 )
 
 # A sample logging configuration. The only tangible logging

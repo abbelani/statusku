@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<ul>	  
+	 {% for note in latest_notes_list %}
+		<li>
+			{{ note.content }}
+		</li>
+	 {% endfor %}
+	</ul>
+
+{% endblock %}
