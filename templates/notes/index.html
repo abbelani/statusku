@@ -1,12 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% if latest_notes_list %}
 	<ul>	  
 	 {% for note in latest_notes_list %}
 		<li>
-			{{ note.content }}
+			{{ note.body }}
 		</li>
 	 {% endfor %}
 	</ul>
 
+	<a href="/notes/add/" class="btn"> Add a Note </a>
+{% endif %}
 {% endblock %}
