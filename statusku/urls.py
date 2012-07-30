@@ -7,6 +7,8 @@ admin.autodiscover()
 # importing all api classes from tastypie
 from notes.api import *
 
+import settings
+
 urlpatterns = patterns('',
     # Examples:
     #  url(r'^$', 'statusku.views.home', name='home'),
@@ -21,6 +23,9 @@ urlpatterns = patterns('',
     url(r'^api/', include(v1_api.urls)),
     
     # notes urls in notes directory                   
-    url(r'^notes/', include('notes.urls'))
-)
+    url(r'^notes/', include('notes.urls')),
+    
+    # hack to get static files served both locally and on heroku                   
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT})
+                       )
 
